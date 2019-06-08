@@ -10,5 +10,8 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard'),
     path('leaderboard', views.leaderboard, name='leaderboard'),
     path('round', views.round, name='round'),
-    path('hints/get', api.getHints, name='getHints'),
+    path('getHints', api.getHints, name='getHints'),
+    path('getRound', api.getRound, name='getRound'),
+    path('checkHint', api.checkHint, name='checkHint'),
+    path('getLocations', api.getLocations, name='getLocations'),
 ]

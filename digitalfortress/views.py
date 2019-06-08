@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from .forms import UserRegisterForm, UserLoginForm, HintForm, RoundForm
 from django.contrib.auth.models import User
@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from . import models
 from django.forms import formset_factory
 
-# Create your views here.
 def index(request):
     if request.user.is_authenticated:
         return HttpResponse("Index page")
