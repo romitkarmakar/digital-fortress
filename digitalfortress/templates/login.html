@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Login to Digital Fortress</title>
+    </head>
+
+    <body>
+        <form action="/login" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Log In">
+        </form>
+    </body>
+</html>

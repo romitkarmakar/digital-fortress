@@ -1,0 +1,21 @@
+<html>
+
+<head>
+    <title>Round No. 1</title>
+    <style>
+        #map {
+            width: 50%
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <h1>Round No.{{round.round}}</h1>
+        {% for hint in  hints %}
+        {{hint}}<br>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

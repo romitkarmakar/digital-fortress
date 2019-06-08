@@ -1,0 +1,5 @@
+contest/__pycache__/
+*/__pycache__/
+digitalfortress/migrations/__pycache__/
+db.sqlite3
+.vscode/

@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Register for DigitalFortress</title>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css'/>
+    </head>
+    <body>
+        <div id="main">
+            <form action="/register" method="POST">
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" value="Register">
+            </form>
+        </div>
+    </body>
+</html>
