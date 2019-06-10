@@ -20,6 +20,7 @@ def getHints(request):
                     val = 1
 
             responses.append({
+                'id': hint.id,
                 'question': hint.hint,
                 'isSolved': val,
                 'position': hint.position
@@ -55,14 +56,35 @@ def checkHint(request):
                 'isTrue': 0
             })
 
+
 @login_required
 def getLocations(request):
     if request.user.is_authenticated:
         response = []
         hints = Hint.objects.filter(round=request.user.profile.currRound)
+        solved = Solved.objects.filter(user=request.user)
+
         for hint in hints:
-            response.append({
-                'position': hint.position
-            })
-        
+            val = 0
+            for i in solved:
+                if i.hint.id == hint.id:
+                    val = 1
+            if val == 1:
+                response.append({
+                    'position': hint.position
+                })
+
         return JsonResponse(response, safe=False)
+
+@login_required
+def checkRound(request):
+    roundId = request.GET.get('id')
+    round = Round.objects.get(id=roundId)
+    if round.answer == request.GET.get('answer'):
+        return JsonResponse({
+            'isTrue': 1
+        })
+    else:
+        return JsonResponse({
+            'isTrue': 0
+        })

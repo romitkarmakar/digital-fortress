@@ -62,7 +62,7 @@ def round(request):
     hints = models.Hint.objects.all()
     print(hints[0].id)
     round = models.Round.objects.get()
-    return render(request, 'round.html', {'hints' : hints, 'round': round})
+    return render(request, 'round.html', {})
 
 @login_required
 def leaderboard(request):

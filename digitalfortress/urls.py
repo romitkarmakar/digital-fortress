@@ -14,4 +14,5 @@ urlpatterns = [
     path('getRound', api.getRound, name='getRound'),
     path('checkHint', api.checkHint, name='checkHint'),
     path('getLocations', api.getLocations, name='getLocations'),
+    path('checkRound', api.checkRound, name='checkRound'),
 ]
