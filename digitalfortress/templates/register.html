@@ -1,15 +1,53 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Register for DigitalFortress</title>
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css'/>
-    </head>
-    <body>
-        <div id="main">
-            <form action="/register" method="POST">
-                {% csrf_token %}
-                {{form}}
-                <input type="submit" value="Register">
-            </form>
-        </div>
-    </body>
+
+<head>
+    <title>Welcome to Digital Fortress</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        {% include 'header.html' %}
+        <section>
+            <div class="container p-3">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 align="center">Register your account</h2>
+                            </div>
+                            <div class="card-body">
+                                <form action="/register" method="POST">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                    <div class="form-group">
+                                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                        <input type="text" class="form-control" id="{{ field.id_for_label }}"
+                                            name="{{ field.html_name }}" value="{{ field.value }}">
+                                    </div>
+                                    {% endfor %}
+                                    <input type="submit" value="Register" class="btn btn-primary mx-auto d-block">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:900&display=swap" rel="stylesheet">
+</body>
+
 </html>

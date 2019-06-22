@@ -1,0 +1,31 @@
+<section id="navigation">
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src="https://img.pngio.com/letter-d-png-letter-d-png-1300_1300.png" alt="Logo" height="50px">
+                igital Fortress
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">About<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Prizes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sponsors</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0">
+                    <a href="{% url 'register' %}"><button class="btn my-2 my-sm-0 btn-danger">Sign Up</button></a>
+                    <a href="{% url 'login' %}"><button class="btn my-2 my-sm-0">Log In</button></a> 
+                </div>
+            </div>
+        </nav>
+    </section>

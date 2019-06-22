@@ -7,11 +7,9 @@ from django.contrib.auth.decorators import login_required
 from . import models
 from django.forms import formset_factory
 
+
 def index(request):
-    if request.user.is_authenticated:
-        return HttpResponse("Index page")
-    else:
-        return HttpResponse("Please Login")
+    return render(request, 'index.html')
 
 def userRegister(request):
     if request.method == 'POST':
@@ -27,15 +25,16 @@ def userRegister(request):
     else:
         form = UserRegisterForm()
 
-    return render(request, 'register.html', {'form' : form})
+    return render(request, 'register.html', {'form': form})
+
 
 def userLogin(request):
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
         if form.is_valid():
             user = authenticate(
-                request, 
-                username=form.cleaned_data['username'], 
+                request,
+                username=form.cleaned_data['username'],
                 password=form.cleaned_data['password']
             )
             if user is not None:
@@ -46,16 +45,19 @@ def userLogin(request):
     else:
         form = UserLoginForm()
 
-    return render(request, 'login.html', {'form' : form})
+    return render(request, 'login.html', {'form': form})
+
 
 @login_required
 def userLogout(request):
     logout(request)
     return HttpResponse("Successfully Logged out")
 
+
 @login_required
 def dashboard(request):
     return render(request, 'dashboard.html')
+
 
 @login_required
 def round(request):
@@ -64,6 +66,16 @@ def round(request):
     round = models.Round.objects.get()
     return render(request, 'round.html', {})
 
+
 @login_required
 def leaderboard(request):
-    return render(request, 'leaderboard.html')
+    people = []
+    profiles = models.Profile.objects.order_by('-score').all()
+
+    for i in profiles:
+        muser = User.objects.get(id = i.user_id)
+        people.append({
+            'username': muser.username,
+            'score': i.score
+        })
+    return render(request, 'leaderboard.html', {'people': people})
