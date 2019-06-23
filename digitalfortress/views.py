@@ -9,7 +9,10 @@ from django.forms import formset_factory
 
 
 def index(request):
-    return render(request, 'index.html')
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    else:
+        return render(request, 'index.html')
 
 
 def userRegister(request):
@@ -31,7 +34,7 @@ def userRegister(request):
 @login_required
 def userLogout(request):
     logout(request)
-    return HttpResponse("Successfully Logged out")
+    return redirect('index')
 
 
 @login_required
