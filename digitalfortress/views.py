@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from django.http import HttpResponse
 from .forms import UserRegisterForm, UserLoginForm, HintForm, RoundForm
 from django.contrib.auth.models import User
@@ -10,6 +10,7 @@ from django.forms import formset_factory
 
 def index(request):
     return render(request, 'index.html')
+
 
 def userRegister(request):
     if request.method == 'POST':
@@ -27,27 +28,6 @@ def userRegister(request):
 
     return render(request, 'register.html', {'form': form})
 
-
-def userLogin(request):
-    if request.method == 'POST':
-        form = UserLoginForm(request.POST)
-        if form.is_valid():
-            user = authenticate(
-                request,
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password']
-            )
-            if user is not None:
-                login(request, user=user)
-                return HttpResponse("Login Successfully")
-            else:
-                return HttpResponse("Authentication Failed")
-    else:
-        form = UserLoginForm()
-
-    return render(request, 'login.html', {'form': form})
-
-
 @login_required
 def userLogout(request):
     logout(request)
@@ -61,9 +41,6 @@ def dashboard(request):
 
 @login_required
 def round(request):
-    hints = models.Hint.objects.all()
-    print(hints[0].id)
-    round = models.Round.objects.get()
     return render(request, 'round.html', {})
 
 
@@ -73,7 +50,7 @@ def leaderboard(request):
     profiles = models.Profile.objects.order_by('-score').all()
 
     for i in profiles:
-        muser = User.objects.get(id = i.user_id)
+        muser = User.objects.get(id=i.user_id)
         people.append({
             'username': muser.username,
             'score': i.score

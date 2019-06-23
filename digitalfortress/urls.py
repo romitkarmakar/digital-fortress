@@ -1,11 +1,13 @@
 from django.urls import path
 from . import views
 from . import api
+from digitalfortress.controllers.Login import LoginView
+from digitalfortress.controllers.Register import RegisterView
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('register', views.userRegister, name='register'),
-    path('login', views.userLogin, name='login'),
+    path('register', RegisterView.as_view(), name='register'),
+    path('login', LoginView.as_view(), name='login'),
     path('logout', views.userLogout, name='logout'),
     path('dashboard', views.dashboard, name='dashboard'),
     path('leaderboard', views.leaderboard, name='leaderboard'),
