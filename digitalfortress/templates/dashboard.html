@@ -13,8 +13,30 @@
     <div id="main">
         {% include 'components/dheader.html' %}
         <h1>Dashboard</h1>
+        <h2>Current Round: [[round.no]]</h2>
         <a class="waves-effect waves-light btn" href="{% url 'round' %}">Go to Round</a>
+        <a class="waves-effect waves-light btn" href="{% url 'leaderboard' %}">Leaderboard</a>
     </div>
+    <script>
+        var app = new Vue({
+            delimiters: ['[[', ']]'],
+            el: "#main",
+            data: {
+                round: {
+                    no: null,
+                    question: null,
+                    answer: null
+                },
+            },
+            mounted() {
+                var self = this;
+                $.getJSON("getRound").then(function (data) {
+                    self.round.no = data.no;
+                    self.round.question = data.question;
+                });
+            }
+        })
+    </script>
 </body>
 
 </html>

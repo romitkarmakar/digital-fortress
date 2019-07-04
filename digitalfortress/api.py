@@ -47,6 +47,8 @@ def checkHint(request):
         hintId = request.GET.get('id')
         hint = Hint.objects.get(id=hintId)
         if hint.answer == request.GET.get('answer'):
+            answer = Solved(user=request.user, hint=hint)
+            answer.save()
             return JsonResponse({
                 'isTrue': 1,
                 'position': hint.position
